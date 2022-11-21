@@ -36,7 +36,6 @@ void setup() {
 	//Disable software watchdog
 	ESP.wdtDisable();
 
-	WiFi.begin();
 	WiFi.mode(WIFI_AP);
 	WiFi.softAPdisconnect(true);
 
@@ -54,7 +53,7 @@ void loop() {
 void loop1() {
 
 	while (true) {
-		curTime = millis(); //Offset time to make sure this works from the start
+		curTime = millis();
 		ESP.wdtFeed(); //Feed the hardware watchdog
 
 #ifdef DEBUG
@@ -64,9 +63,7 @@ void loop1() {
 		//Process manual moves (button pressed)
 		manualMove();
 		//If motor enable, process move commands (STEP, DIR from main board)
-		///if (GPIP(EN) == HIGH) {
-		if (true && manuallyMoving == false) {
-
+		if (GPIP(EN) == HIGH && manuallyMoving == false) {
 			setpoint = target1;
 			if (curTime - previousCommandMove >= COMMAND_TIMING) {
 					commandedMove();
@@ -105,18 +102,18 @@ void manualMove() {
 	}
 	else if (buttonInState == false) {
 		if (speedSelect) {
-			pwmOut(LOW_SPEED);
+			pwmOut(HIGH_SPEED);
 		}
 		else {
-			pwmOut(HIGH_SPEED);
+			pwmOut(LOW_SPEED);
 		}
 	}
 	else if (buttonOutState == false) {
 		if (speedSelect) {
-			pwmOut(-LOW_SPEED);
+			pwmOut(-HIGH_SPEED);
 		}
 		else {
-			pwmOut(-HIGH_SPEED);
+			pwmOut(-LOW_SPEED);
 		}
 	}
 }

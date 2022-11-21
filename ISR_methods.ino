@@ -8,6 +8,11 @@ void ICACHE_RAM_ATTR countStep() {
 }
 
 void pwmOut(int out) {
+
+#ifdef INVERT_DIR
+	out = -out;
+#endif
+
 	if (out > 0) {
 		analogWrite(M1, OUT_LIM_MAX);
 		analogWrite(M2, OUT_LIM_MAX - out);

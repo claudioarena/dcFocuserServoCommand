@@ -1,5 +1,6 @@
 /// DEBUG OPTIONS ///
-#define DEBUG
+//#define DEBUG
+#define INVERT_DIR //Inverts the direction the motor turns on +/- steps
 
 /// PINS ///
 #define BUTTON_IN			13		// D7
@@ -11,7 +12,8 @@
 #define EN					5		// D81
 #define SPEED_SELECT_SWITCH	A0		//A0, connected to a switch to change speed when focusing manually
 
-#define COMMAND_TIMING		10		//ms between each position increment/decrement when receiving a step command
+#define COMMAND_TIMING		10		//ms between each position increment/decrement when receiving a step command.
+                                    //If we don't want stutters or lagging, must match frequency of sent commands.
 #define COMMAND_WAIT		100		//ms to wait between move command received and start of moving
 
 #define OUT_LIM_MAX			255
