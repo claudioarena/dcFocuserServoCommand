@@ -22,8 +22,7 @@ void setPins() {
 	pinMode(M2, OUTPUT);
 	digitalWrite(M2, HIGH);
 
-	pinMode(EN, OUTPUT);
-	digitalWrite(EN, HIGH);
+	pinMode(EN, INPUT);
 
 	analogWriteFreq(25000);  // set PWM to 25Khz
 	analogWriteRange(255);   // set PWM to 255 levels
@@ -90,6 +89,8 @@ void manualMove() {
 	previousButtonInState = buttonInState;
 	previousButtonOutState = buttonOutState;
 	previousSpeedState = speedSelect;
+	pinMode(EN, OUTPUT);
+	digitalWrite(EN, HIGH);
 	manuallyMoving = true;
 	delay(2); //debounce
 
@@ -97,6 +98,7 @@ void manualMove() {
 	//if both pressed or none pressed
 	if ((buttonInState == false && buttonOutState == false) ||
 		(buttonInState == true && buttonOutState == true)) {
+		pinMode(EN, INPUT);
 		pwmOut(0);
 		manuallyMoving = false;
 	}

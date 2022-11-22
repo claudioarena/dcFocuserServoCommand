@@ -1,5 +1,5 @@
 ﻿void help() {
-	Serial.println(F("\n DC motor controller and stepper interface emulator"));
+	Serial.println(F("\nDC motor controller and stepper interface emulator"));
 	Serial.println(F("Available serial commands: (lines end with CRLF or LF)"));
 	Serial.println(F("? prints out current position and setpoint values"));
 	Serial.println(F("X123 sets the target destination for the motor to 123 encoder pulses"));
